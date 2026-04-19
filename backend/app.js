@@ -16,9 +16,12 @@ app.use(
 
 const userRoutes = require("./routes/user");
 const booksRoutes = require("./routes/book");
+const uploadRoutes = require("./routes/upload");
 
 app.use("/api/auth", userRoutes);
 app.use("/api", booksRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/api/upload", uploadRoutes);
+
 
 module.exports = app;
