@@ -1,6 +1,7 @@
+require("dotenv").config({ path: "./middleware/token.env" });
 const express = require("express");
 const cors = require("cors");
-const path = require('path')
+const path = require("path");
 
 const app = express();
 
@@ -16,12 +17,9 @@ app.use(
 
 const userRoutes = require("./routes/user");
 const booksRoutes = require("./routes/book");
-const uploadRoutes = require("./routes/upload");
 
 app.use("/api/auth", userRoutes);
-app.use("/api", booksRoutes);
+app.use("/api/books", booksRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
-app.use("/api/upload", uploadRoutes);
-
 
 module.exports = app;

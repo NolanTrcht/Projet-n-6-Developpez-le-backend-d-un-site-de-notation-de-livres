@@ -34,11 +34,16 @@ exports.login = (req, res, next) => {
                 .status(401)
                 .json({ message: "Paire identifiant/mot de passe incorrecte" });
             } else {
+              console.log("SECRET:", process.env.TOKEN_SECRET);
               res.status(200).json({
                 userId: user._id,
-                token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {
-                  expiresIn: "24h",
-                }),
+                token: jwt.sign(
+                  { userId: user._id },
+                  process.env.TOKEN_SECRET,
+                  {
+                    expiresIn: "24h",
+                  },
+                ),
               });
             }
           })
